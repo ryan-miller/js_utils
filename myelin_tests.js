@@ -1,34 +1,40 @@
-function isBetween(from, to) {
-   var r = randomIntegerBetween(from,to);
+function isIntBetween(from, to) {
+   var r = randomIntegerBetween(from, to);
    return (from <= r && r <= to);
 }
 
+function isFloatBetween(from, to) {
+   var r = randomFloatBetween(from, to);
+   return (from <= r && r <= to);
+}
 
-test('Array utils', function() {
-   ok(isBetween(1,10), 'positive integers');
-   ok(isBetween(-10,-1), 'negative integers');
-   ok(isBetween(0,1), 'positive decimals');
-   ok(isBetween(-1,0), 'negative decimals');
-})
+function isCorrectArray(from, rows, columns, to) {
+   var n = to2D(from, rows, columns);
+    return !!n && !!to && !(n<to || to<n); 
+}
+
+test('Random numbers', function() {
+   // integers
+   ok(isIntBetween(1,10), 'positive integers');
+   ok(isIntBetween(-10,-1), 'negative integers');
+   ok(isIntBetween(0,1), 'positive integers');
+   ok(isIntBetween(-1,0), 'negative integers');
+   ok(isIntBetween(-100, 100), 'span zero');
+   
+   // floats
+   ok(isFloatBetween(1.9,10.9), 'positive floats');
+   ok(isFloatBetween(-10.4,-1.1), 'negative floats');
+   ok(isFloatBetween(0.0,1.9), 'positive floats');
+   ok(isFloatBetween(-1.9,0.0), 'negative floats');
+   ok(isFloatBetween(-100.4, 100.7), 'span zero');
+});
+
+test('Array functions', function() {
+   // 1d array to 2d array
+   ok(isCorrectArray([0,0,0,0], 2, 2, [[0,0],[0,0]]));
+   
+   // 2d array to 1d array
+   
+});
 
 
-/*
-test('assertions', function() {  
-    ok( 1 == 1, 'one equals one');  
-})
-// Let's test this function  
-function isEven(val) {  
-    return val % 2 === 0;  
-}  
-  
-test('isEven()', function() { 
-    ok(isEven(0), 'Zero is an even number'); 
-    ok(isEven(2), 'So is two'); 
-    ok(isEven(-4), 'So is negative four'); 
-    ok(!isEven(1), 'One is not an even number'); 
-    ok(!isEven(-7), 'Neither does negative seven'); 
- 
-    // Fails 
-    ok(isEven(3), 'Three is an even number');  
-})
-*/
