@@ -15,8 +15,6 @@ function isCorrectArray(from, rows, columns, to) {
 
 function didInitOK(length, value, match) {
    var a = initArrayWithValue(length,value);
-   console.log("a is " + a);
-   console.log("match is " + match);
    return !!a && !!match && !(a<match || match<a); ;
 }
 
