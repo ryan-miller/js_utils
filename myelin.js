@@ -33,6 +33,7 @@ var randomFloatBetween = function(f,t) {
    }
 };
 
+/** for arrays, would like to set these on the Array prototype */
 // do we need both row and columns?  can rows be inferred from columns?
 var to2D = function(s, r, c) {
    // todo: make sure s is Array
@@ -60,3 +61,13 @@ var to2D = function(s, r, c) {
       return false;
    }
 };
+
+/****************************/
+var initArrayWithValue = function(l,v) {
+   var a = new Array(l);
+   for (var i=0; i< a.length; i++) {
+      a[i] = v;
+   }
+
+   return a;
+}

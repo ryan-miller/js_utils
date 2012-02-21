@@ -13,6 +13,13 @@ function isCorrectArray(from, rows, columns, to) {
     return !!n && !!to && !(n<to || to<n); 
 }
 
+function didInitOK(length, value, match) {
+   var a = initArrayWithValue(length,value);
+   console.log("a is " + a);
+   console.log("match is " + match);
+   return !!a && !!match && !(a<match || match<a); ;
+}
+
 test('Random numbers', function() {
    // integers
    ok(isIntBetween(1,10), 'positive integers');
@@ -45,6 +52,11 @@ test('Array functions', function() {
    
    // 2d array to 1d array
    
+   // init array with value
+   ok(didInitOK(2,0,[0,0]), 'simple array');
+   ok(didInitOK(5,"a",["a","a","a","a","a"]), 'string array');
+   ok(didInitOK(3,null,[null,null,null]), 'null array');
+   ok(!didInitOK(5,0,[0,0]), 'false positive');
 });
 
 
