@@ -8,15 +8,10 @@ function isFloatBetween(from, to) {
    return (from <= r && r <= to);
 }
 
-function isCorrectArray(from, rows, columns, to) {
-   var n = to2D(from, rows, columns);
+/* compare arrays
     return !!n && !!to && !(n<to || to<n); 
-}
+*/
 
-function didInitOK(length, value, match) {
-   var a = initArrayWithValue(length,value);
-   return !!a && !!match && !(a<match || match<a); ;
-}
 
 test('Random numbers', function() {
    // integers
@@ -44,17 +39,18 @@ test('Random numbers', function() {
 
 test('Array functions', function() {
    // 1d array to 2d array
-   ok(isCorrectArray([0,0,0,0], 2, 2, [[0,0],[0,0]]),'basic array');
-   ok(!isCorrectArray(null, 2, 2, null), 'handles null source arrays')
+   deepEqual(to2D([0,0,0,0],2,2), [[0,0],[0,0]],'basic array')
+   notDeepEqual(to2D(null, 2, 2), null, 'handles null source arrays')
+   
    // user provides in correct dimensions
    
    // 2d array to 1d array
    
    // init array with value
-   ok(didInitOK(2,0,[0,0]), 'simple array');
-   ok(didInitOK(5,"a",["a","a","a","a","a"]), 'string array');
-   ok(didInitOK(3,null,[null,null,null]), 'null array');
-   ok(!didInitOK(5,0,[0,0]), 'false positive');
+   deepEqual(initArrayWithValue(2,0), [0,0], 'simple array');
+   deepEqual(initArrayWithValue(5,"a"), ["a","a","a","a","a"],'string array');
+   deepEqual(initArrayWithValue(3,null), [null,null,null], 'null array');
+   notDeepEqual(initArrayWithValue(5,0), [0,0], 'just for kicks');
 });
 
 
